@@ -10,13 +10,14 @@
 
 <style>
 :root{
-  --primary:#1e3a8a; /* Navy Blue */
-  --secondary:#172554; /* Darker Navy */
+  --primary:#1e40af; /* Navy Blue */
+  --secondary:#1e3a8a; /* Deep Navy */
   --success:#22c55e; 
   --danger:#ef4444;
   --bg:#ffffff; 
-  --border:rgba(0,0,0,0.12);
-  --tsi-navy: #1e3a8a; 
+  --glass:rgba(255,255,255,0.06); 
+  --border:rgba(0,0,0,0.15);
+  --tsi-navy: #1e40af; 
   --tsi-gold: #ffd700;
 }
 
@@ -25,7 +26,7 @@
 body{
   margin:0; 
   font-family:'Plus Jakarta Sans',sans-serif; 
-  background:#f8fafc; 
+  background:white; 
   padding:40px 15px;
   -webkit-font-smoothing: antialiased;
 }
@@ -33,88 +34,92 @@ body{
 .container{
   max-width:850px; 
   margin:auto; 
-  padding:40px; 
-  border-radius:24px; 
-  background:#ffffff; 
+  padding:50px; 
+  border-radius:28px; 
+  background:rgba(255,255,255,0.06); 
+  backdrop-filter:blur(25px); 
   border:1px solid var(--border); 
-  box-shadow:0 20px 50px rgba(0,0,0,0.08);
+  box-shadow:0 30px 70px rgba(0,0,0,0.6);
 }
 
 h1{
-  font-size: 2.4rem; 
-  margin-bottom: 10px; 
+  font-size: 2.5rem; 
+  margin-bottom: 12px; 
   text-align: center; 
   font-weight: 800;
   color: #000;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
 }
 
 .tsi-title-main { color: var(--tsi-navy); }
-.tsi-title-sub { color: #475569; }
+.tsi-title-sub { color: var(--tsi-gold); }
 .tsi-title-end { color: var(--danger); }
 
 .description{
-  color:#475569; 
+  color:#000; 
   font-size: 0.95rem;
-  margin-bottom:35px; 
-  border-bottom:1px solid #f1f5f9; 
-  padding-bottom:20px;
+  margin-bottom:40px; 
+  border-bottom:1px solid var(--border); 
+  padding-bottom:25px;
   text-align: center;
-  line-height: 1.5;
 }
 
-section{margin-bottom:35px;}
+section{margin-bottom:40px;}
 
 h3{
-  font-size:0.9rem; 
+  font-size:0.85rem; 
   text-transform:uppercase; 
-  letter-spacing:1.5px; 
+  letter-spacing:2px; 
   color:var(--primary); 
   margin-bottom:20px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
-.form-group{margin-bottom:20px;}
+.form-group{margin-bottom:22px;}
 
 label{
   display:flex; 
   align-items:center; 
   gap:8px; 
-  font-size:0.9rem; 
+  font-size:0.85rem; 
   margin-bottom:8px; 
-  color:#1e293b;
+  color:#000;
   font-weight: 600;
 }
 
 input,select,textarea{
   width:100%; 
-  padding:14px; 
-  border-radius:12px; 
-  border:1.5px solid #e2e8f0; 
-  background:#fcfdfe; 
-  color:#1e293b; 
-  font-size:1rem; 
-  transition:0.2s ease;
+  padding:15px; 
+  border-radius:14px; 
+  border:1px solid var(--border); 
+  background:rgba(0,0,0,0.55); 
+  color:#fff; 
+  font-size:0.95rem; 
+  transition:0.3s;
 }
 
 input:focus,select:focus,textarea:focus{
   outline:none; 
   border-color:var(--primary); 
-  background:#fff;
-  box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.05);
+  background:rgba(0,0,0,0.75);
+}
+
+select option {
+  background: #1a1a1a;
+  color: #fff;
 }
 
 .error-message{
-  font-size:0.8rem; 
+  font-size:0.75rem; 
   color:var(--danger); 
   margin-top:6px; 
   display:block;
 }
 
 .radio-option{
-  display:flex; align-items:center; gap:12px; padding:16px;
+  display:flex; align-items:center; gap:12px; padding:15px;
   background: #f8fafc; 
-  border: 1.5px solid #e2e8f0;
+  border: 1px solid #e2e8f0;
   border-radius: 12px; 
   margin-bottom: 12px; 
   cursor: pointer;
@@ -126,24 +131,26 @@ input:focus,select:focus,textarea:focus{
   background: #f1f5f9;
 }
 
-.radio-option span{ color: #0f172a; font-weight: 500; font-size: 0.95rem; }
-.radio-option input[type="radio"] { width: 18px; height: 18px; margin: 0; cursor: pointer; }
+.radio-option span{ color: #0f172a; font-weight: 500; }
+.radio-option input[type="radio"] { width: auto; margin: 0; }
 
 .employment-details { 
   display: none; 
   margin-top: 15px; 
-  padding: 20px; 
+  padding: 25px; 
   background: #f8fafc; 
-  border-radius: 14px; 
+  border-radius: 16px; 
   border: 1px solid #e2e8f0; 
 }
 .employment-details.active { display: block; }
+.employment-details label { color: #0f172a; }
+.employment-details input { background: #ffffff; color: #0f172a; border: 1px solid #e2e8f0; }
 
 button{
   width:100%; 
   padding:18px; 
   border:none; 
-  border-radius:14px; 
+  border-radius:16px; 
   font-size:1.05rem; 
   font-weight:700; 
   background:linear-gradient(90deg,var(--primary),var(--secondary)); 
@@ -153,8 +160,8 @@ button{
 }
 
 button:hover:not(:disabled){
-  transform:translateY(-2px); 
-  box-shadow:0 10px 20px rgba(30, 58, 138, 0.2);
+  transform:translateY(-3px); 
+  box-shadow:0 12px 30px rgba(30,64,175,0.4);
 }
 
 .loader{
@@ -165,7 +172,6 @@ button:hover:not(:disabled){
 @keyframes spin{ 100%{transform:rotate(360deg);} }
 
 #success{ display: none; text-align: center; }
-#success h1 { font-size: 2rem; color: var(--tsi-navy); }
 
 .info-box {
   margin-top: 25px; 
@@ -176,8 +182,7 @@ button:hover:not(:disabled){
   text-align: left;
 }
 
-.info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #475569; font-size: 0.95rem; }
-.info-row i { color: var(--primary); }
+.info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #475569; }
 
 @media (min-width: 768px) {
   .personal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -277,23 +282,22 @@ button:hover:not(:disabled){
       </div>
 
       <div class="employment-details" id="employmentDetails">
-        <div class="personal-grid">
-          <div class="form-group">
-            <label><i data-lucide="user-circle"></i> Job Title</label>
-            <input type="text" name="profession" id="profession" placeholder="e.g. Developer">
-            <span class="error-message" id="professionError"></span>
-          </div>
-          <div class="form-group">
-            <label><i data-lucide="building-2"></i> Company</label>
-            <input type="text" name="placeOfWork" id="placeOfWork" placeholder="e.g. Tech Corp">
-            <span class="error-message" id="placeOfWorkError"></span>
-          </div>
+        <div class="form-group">
+          <label><i data-lucide="user-circle"></i> Job Title / Profession</label>
+          <input type="text" name="profession" id="profession" placeholder="e.g. Software Developer">
+          <span class="error-message" id="professionError"></span>
+        </div>
+
+        <div class="form-group">
+          <label><i data-lucide="building-2"></i> Company / Organization</label>
+          <input type="text" name="placeOfWork" id="placeOfWork" placeholder="e.g. Tech Corp Ltd">
+          <span class="error-message" id="placeOfWorkError"></span>
         </div>
       </div>
     </section>
 
     <section>
-      <h3>Discovery</h3>
+      <h3>Awareness (Discovery)</h3>
       <div class="form-group">
         <label><i data-lucide="search"></i> How did you hear about us?</label>
         <select name="referralSource" id="referralSource">
@@ -313,7 +317,7 @@ button:hover:not(:disabled){
       <span id="btnText">Submit Application</span>
       <div class="loader" id="loader"></div>
     </button>
-    <div id="formStatus" style="color: var(--danger); text-align: center; margin-top: 15px; font-size: 0.9rem;"></div>
+    <div id="formStatus" style="color: var(--danger); text-align: center; margin-top: 15px; font-weight: 600;"></div>
   </form>
 </div>
 
@@ -321,8 +325,8 @@ button:hover:not(:disabled){
   <div class="success-icon-container">
     <i data-lucide="check-circle" style="color: var(--success); width: 80px; height: 80px; stroke-width: 1.5;"></i>
   </div>
-  <h1>Application Success</h1>
-  <p style="color: #64748b; font-size: 1rem;">Thank you for choosing Techsavanna Software Institute.</p>
+  <h1 style="margin-top: 0;">Application Success</h1>
+  <p style="color: #64748b; font-size: 1.1rem;">Thank you for choosing Techsavanna Software Institute.</p>
   <div class="info-box">
     <div class="info-row"><i data-lucide="mail"></i> <span>A confirmation email will be sent shortly.</span></div>
     <div class="info-row"><i data-lucide="message-circle"></i> <span>Admissions will contact you via WhatsApp.</span></div>
@@ -373,8 +377,8 @@ form.addEventListener('submit', async (e) => {
     document.getElementById('employedError').innerText = "Select employment status";
     valid = false;
   } else if(employed.value === 'Yes') {
-    if(!form.profession.value.trim()){ document.getElementById('professionError').innerText = "Required"; valid = false; }
-    if(!form.placeOfWork.value.trim()){ document.getElementById('placeOfWorkError').innerText = "Required"; valid = false; }
+    if(!form.profession.value.trim()){ document.getElementById('professionError').innerText = "Profession is required"; valid = false; }
+    if(!form.placeOfWork.value.trim()){ document.getElementById('placeOfWorkError').innerText = "Company name is required"; valid = false; }
   }
 
   if(!valid) return;
@@ -399,7 +403,7 @@ form.addEventListener('submit', async (e) => {
       document.getElementById('success').style.display = 'block';
       lucide.createIcons(); 
     } else {
-      document.getElementById('formStatus').innerText = "Error submitting application.";
+      document.getElementById('formStatus').innerText = "Error: " + text;
       resetBtn();
     }
   } catch (err) {
