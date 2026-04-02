@@ -13,7 +13,7 @@
   --primary:#1e40af; 
   --secondary:#1e3a8a; 
   --success:#22c55e; 
-  --danger:#ef4444;
+  --danger:#ff0000; /* Bright Red */
   --bg:#ffffff; 
   --glass:rgba(255,255,255,0.06); 
   --border:rgba(0,0,0,0.15);
@@ -53,7 +53,7 @@ h1{
 
 .tsi-title-main { color: var(--tsi-navy); }
 .tsi-title-sub { color: var(--tsi-gold); }
-.tsi-title-end { color: var(--danger); }
+.tsi-title-end { color: #ef4444; }
 
 .description{
   color:#000; 
@@ -111,9 +111,10 @@ select option {
 
 .error-message{
   font-size:0.75rem; 
-  color:var(--danger); 
+  color:var(--danger); /* High contrast bright red */
   margin-top:6px; 
   display:block;
+  font-weight: 700;
 }
 
 .radio-option{
@@ -353,6 +354,8 @@ document.getElementsByName('employed').forEach(radio => {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   let valid = true;
+  let firstErrorField = null;
+  
   document.querySelectorAll('.error-message').forEach(el => el.innerText = "");
   document.getElementById('formStatus').innerText = "";
 
@@ -368,6 +371,7 @@ form.addEventListener('submit', async (e) => {
   requiredFields.forEach(f => {
     if(!form[f.id].value.trim()){
       document.getElementById(f.err).innerText = f.msg;
+      if (!firstErrorField) firstErrorField = form[f.id];
       valid = false;
     }
   });
@@ -375,13 +379,28 @@ form.addEventListener('submit', async (e) => {
   const employed = form.querySelector('input[name="employed"]:checked');
   if(!employed){
     document.getElementById('employedError').innerText = "Select employment status";
+    if (!firstErrorField) firstErrorField = document.getElementById('employedYes');
     valid = false;
   } else if(employed.value === 'Yes') {
-    if(!form.profession.value.trim()){ document.getElementById('professionError').innerText = "Profession is required"; valid = false; }
-    if(!form.placeOfWork.value.trim()){ document.getElementById('placeOfWorkError').innerText = "Company name is required"; valid = false; }
+    if(!form.profession.value.trim()){ 
+        document.getElementById('professionError').innerText = "Profession is required"; 
+        if (!firstErrorField) firstErrorField = form.profession;
+        valid = false; 
+    }
+    if(!form.placeOfWork.value.trim()){ 
+        document.getElementById('placeOfWorkError').innerText = "Company name is required"; 
+        if (!firstErrorField) firstErrorField = form.placeOfWork;
+        valid = false; 
+    }
   }
 
-  if(!valid) return;
+  if(!valid) {
+    if (firstErrorField) {
+        firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstErrorField.focus({ preventScroll: true });
+    }
+    return;
+  }
 
   const btn = document.getElementById('submitBtn');
   const loader = document.getElementById('loader');
@@ -401,6 +420,7 @@ form.addEventListener('submit', async (e) => {
     if(text === "Success") {
       document.getElementById('formBody').style.display = 'none';
       document.getElementById('success').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons(); 
     } else {
       document.getElementById('formStatus').innerText = "Error: " + text;
