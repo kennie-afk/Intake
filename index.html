@@ -10,124 +10,107 @@
 
 <style>
 :root{
-  --primary: #0056b3; 
-  --secondary: #ffd700; 
-  --tertiary: #ef4444; 
-  --success: #22c55e;
-  --danger: #ef4444;
-  /* Professional Greyish Palette */
-  --bg-body: #f1f5f9; /* Soft Slate Grey-White */
-  --bg-card: #ffffff;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --input-focus: rgba(0, 86, 179, 0.1);
+  --primary:#7c3aed; 
+  --secondary:#4f46e5; 
+  --success:#22c55e; 
+  --danger:#ef4444;
+  --bg:#ffffff; 
+  --glass:rgba(255,255,255,0.06); 
+  --border:rgba(0,0,0,0.12);
+  --tsi-purple: #7c3aed; 
+  --tsi-gold: #ffd700;
 }
 
 *{box-sizing:border-box;}
 
 body{
-  margin:0;
-  font-family:'Plus Jakarta Sans',sans-serif;
-  background-color: var(--bg-body);
-  /* Added a very subtle radial gradient for a "premium" feel */
-  background-image: radial-gradient(at 0% 0%, rgba(0, 86, 179, 0.05) 0px, transparent 50%),
-                    radial-gradient(at 100% 0%, rgba(255, 215, 0, 0.03) 0px, transparent 50%);
-  color: var(--text-main);
-  padding: 60px 15px;
-  min-height: 100vh;
+  margin:0; 
+  font-family:'Plus Jakarta Sans',sans-serif; 
+  background:white; 
+  padding:40px 15px;
 }
 
 .container{
-  max-width: 850px;
-  margin: auto;
-  padding: 50px;
-  border-radius: 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  max-width:850px; 
+  margin:auto; 
+  padding:50px; 
+  border-radius:28px; 
+  background:rgba(255,255,255,0.06); 
+  backdrop-filter:blur(25px); 
+  border:1px solid var(--border); 
+  box-shadow:0 30px 70px rgba(0,0,0,0.6);
 }
 
-.hero-image-container {
-  width: 100%;
-  height: 220px;
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 40px;
-  position: relative;
-  border: 1px solid var(--border);
-  background: #f8fafc;
+h1{
+  font-size: 2.6rem; 
+  margin-bottom: 12px; 
+  text-align: center; 
+  font-weight: 800;
+  color: #000;
 }
 
-.hero-image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s ease;
-}
-
-.container:hover .hero-image-container img {
-  transform: scale(1.02);
-}
-
-h1{ font-size: 2.2rem; margin-bottom: 12px; text-align: center; font-weight: 800; letter-spacing: -0.02em; }
+.tsi-title-main { color: var(--tsi-purple); }
+.tsi-title-sub { color: var(--tsi-gold); }
+.tsi-title-end { color: var(--danger); }
 
 .description{
-  color: var(--text-muted); 
-  margin-bottom: 45px; 
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 30px; 
-  text-align: center; 
-  font-size: 1.05rem; 
-  line-height: 1.6;
+  color:#000; 
+  margin-bottom:40px; 
+  border-bottom:1px solid var(--border); 
+  padding-bottom:25px;
+  text-align: center;
 }
 
-section{margin-bottom:45px;}
+section{margin-bottom:40px;}
 
 h3{
-  font-size: 0.8rem; 
-  text-transform: uppercase; 
-  letter-spacing: 0.1em;
-  color: var(--primary); 
-  margin-bottom: 25px; 
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size:0.85rem; 
+  text-transform:uppercase; 
+  letter-spacing:2px; 
+  color:var(--primary); 
+  margin-bottom:20px;
 }
 
-h3::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--border);
+.form-group{margin-bottom:22px;}
+
+label{
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+  font-size:0.85rem; 
+  margin-bottom:8px; 
+  color:#000;
+  font-weight: 600;
 }
 
-.form-group{margin-bottom:24px;}
-
-label{ display:flex; align-items:center; gap:8px; font-size:0.85rem; margin-bottom:10px; font-weight: 600; color: var(--text-main); }
-
-input,select{
+input,select,textarea{
   width:100%; 
-  padding: 14px 16px; 
-  border-radius: 12px; 
-  border: 1px solid var(--border);
-  background: #ffffff; 
-  font-size: 0.95rem; 
-  transition: all 0.2s;
-  color: var(--text-main);
+  padding:15px; 
+  border-radius:14px; 
+  border:1px solid var(--border); 
+  background:rgba(0,0,0,0.45); 
+  color:#fff; 
+  font-size:0.95rem; 
+  transition:0.3s;
 }
 
-input:focus,select:focus{
+input:focus,select:focus,textarea:focus{
   outline:none; 
-  border-color: var(--primary); 
-  box-shadow: 0 0 0 4px var(--input-focus);
+  border-color:var(--primary); 
+  background:rgba(0,0,0,0.65);
+}
+
+.error-message{
+  font-size:0.75rem; 
+  color:var(--danger); 
+  margin-top:6px; 
+  display:block;
 }
 
 .radio-option{
   display:flex; align-items:center; gap:12px; padding:15px;
   background: #f8fafc; 
-  border: 1px solid var(--border);
+  border: 1px solid #e2e8f0;
   border-radius: 12px; 
   margin-bottom: 12px; 
   cursor: pointer;
@@ -139,17 +122,37 @@ input:focus,select:focus{
   background: #f1f5f9;
 }
 
+.radio-option span{ color: #0f172a; font-weight: 500; }
 .radio-option input[type="radio"] { width: auto; margin: 0; }
 
+.employment-details { 
+  display: none; 
+  margin-top: 15px; 
+  padding: 25px; 
+  background: #f8fafc; 
+  border-radius: 16px; 
+  border: 1px solid #e2e8f0; 
+}
+.employment-details.active { display: block; }
+.employment-details label { color: #0f172a; }
+.employment-details input { background: #ffffff; color: #0f172a; border: 1px solid #e2e8f0; }
+
 button{
-  width:100%; padding: 18px; border:none; border-radius: 14px; font-size: 1.05rem;
-  font-weight:700; background: var(--primary); color:white; cursor:pointer; transition: 0.3s;
+  width:100%; 
+  padding:18px; 
+  border:none; 
+  border-radius:16px; 
+  font-size:1.05rem; 
+  font-weight:700; 
+  background:linear-gradient(90deg,var(--primary),var(--secondary)); 
+  color:white; 
+  cursor:pointer; 
+  transition:0.3s;
 }
 
 button:hover:not(:disabled){
-  transform: translateY(-2px);
-  background: #004494;
-  box-shadow: 0 10px 15px -3px rgba(0, 86, 179, 0.3);
+  transform:translateY(-3px); 
+  box-shadow:0 12px 30px rgba(124,58,237,0.5);
 }
 
 .loader{
@@ -159,29 +162,27 @@ button:hover:not(:disabled){
 
 @keyframes spin{ 100%{transform:rotate(360deg);} }
 
-#success{display:none;text-align:center;}
+#success{ display: none; text-align: center; }
 
-.info-box{
-  margin-top:25px; padding:25px; border-radius:16px;
-  background: #f8fafc; border: 1px solid var(--border); text-align:left;
+.success-icon-container {
+  margin-bottom: 25px;
 }
 
-.info-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; color: var(--text-muted); font-size: 0.95rem; }
+#success p{color:#64748b; font-size:1.1rem;}
 
-.error-message { color: var(--danger); font-size: 0.8rem; margin-top:6px; display:block; font-weight: 500; }
+.info-box {
+  margin-top: 25px; 
+  padding: 25px; 
+  border-radius: 16px;
+  background: #f8fafc; 
+  border: 1px solid #e2e8f0; 
+  text-align: left;
+}
 
-#formStatus { margin-top: 20px; text-align: center; color: var(--danger); font-weight: 600; }
+.info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #475569; }
 
-.employment-details { display: none; margin-top: 15px; padding: 25px; background: #f8fafc; border-radius: 16px; border: 1px solid var(--border); }
-.employment-details.active { display: block; }
-
-/* Desktop adjustments */
 @media (min-width: 768px) {
-  .personal-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
+  .personal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 }
 </style>
 </head>
@@ -190,19 +191,14 @@ button:hover:not(:disabled){
 
 <div class="container">
 <div id="formBody">
-  <div class="hero-image-container">
-    <img src="image.png" alt="Techsavanna Software Institute Banner">
-  </div>
 
   <h1 id="mainTitle">
-    <span style="color: var(--primary);">Techsavanna</span> 
-    <span style="color: var(--secondary);">Software</span> 
-    <span style="color: var(--tertiary);">Institute</span>
+    <span class="tsi-title-main">Techsavanna</span> 
+    <span class="tsi-title-sub">Software</span> 
+    <span class="tsi-title-end">Institute</span>
   </h1>
 
-  <p class="description">
-    Advance your career with our professional software programs. Select your preferred track and intake to get started.
-  </p>
+  <p class="description">Advance your career with our professional software programs. Select your preferred track and intake to get started.</p>
 
   <form id="mainForm">
     <section>
@@ -298,7 +294,7 @@ button:hover:not(:disabled){
     </section>
 
     <section>
-      <h3>Discovery</h3>
+      <h3>Awareness(Discovery)</h3>
       <div class="form-group">
         <label><i data-lucide="search"></i> How did you hear about us?</label>
         <select name="referralSource" id="referralSource">
@@ -318,16 +314,16 @@ button:hover:not(:disabled){
       <span id="btnText">Submit Application</span>
       <div class="loader" id="loader"></div>
     </button>
-    <div id="formStatus"></div>
+    <div id="formStatus" style="color: var(--danger); text-align: center; margin-top: 10px;"></div>
   </form>
 </div>
 
 <div id="success">
-  <div class="success-icon">
-    <i data-lucide="check-circle" style="color:#22c55e; width:80px; height:80px;"></i>
+  <div class="success-icon-container">
+    <i data-lucide="check-circle" style="color: var(--success); width: 80px; height: 80px; stroke-width: 1.5;"></i>
   </div>
-  <h1 style="margin-top: 20px;">Application Success</h1>
-  <p style="color: var(--text-muted);">Thank you for choosing Techsavanna Software Institute.</p>
+  <h1 style="margin-top: 0;">Application Success</h1>
+  <p style="color: #64748b; font-size: 1.1rem;">Thank you for choosing Techsavanna Software Institute.</p>
   <div class="info-box">
     <div class="info-row"><i data-lucide="mail"></i> <span>A confirmation email will be sent shortly.</span></div>
     <div class="info-row"><i data-lucide="message-circle"></i> <span>Admissions will contact you via WhatsApp.</span></div>
@@ -402,7 +398,7 @@ form.addEventListener('submit', async (e) => {
     if(text === "Success") {
       document.getElementById('formBody').style.display = 'none';
       document.getElementById('success').style.display = 'block';
-      lucide.createIcons();
+      lucide.createIcons(); 
     } else {
       document.getElementById('formStatus').innerText = "Error: " + text;
       resetBtn();
