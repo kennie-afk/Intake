@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TSI Intake Registration</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --primary:#0056b3; 
+  --secondary:#ffd700; 
+  --tertiary:#ef4444; 
+  --success:#22c55e;
+  --danger:#ef4444;
+  --bg:#ffffff;
+  --glass:rgba(0, 86, 179, 0.03);
+  --border:rgba(0, 86, 179, 0.12);
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:#1a1a1a;
+  padding:40px 15px;
+}
+
+.container{
+  max-width:800px;
+  margin:auto;
+  padding:50px;
+  border-radius:28px;
+  background:var(--glass);
+  backdrop-filter:blur(25px);
+  border:1px solid var(--border);
+  box-shadow:0 30px 70px rgba(0,0,0,0.05);
+}
+
+.hero-image-container {
+  width: 100%;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
+  background: #f0f0f0;
+}
+
+.hero-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: contrast(1.02) brightness(1.02);
+}
+
+.container:hover .hero-image-container img {
+  transform: scale(1.05);
+}
+
+h1{ font-size:2.6rem; margin-bottom:12px; text-align: center; }
+
+#mainTitle { background: none; -webkit-text-fill-color: initial; }
+
+.description{
+  color:#444; margin-bottom:40px; border-bottom:1px solid var(--border);
+  padding-bottom:25px; font-weight:500; text-align: center; font-size: 1.05rem; line-height: 1.6;
+}
+
+section{margin-bottom:40px;}
+
+h3{
+  font-size:0.85rem; text-transform:uppercase; letter-spacing:2px;
+  color:var(--primary); margin-bottom:20px; font-weight:700;
+}
+
+.form-group{margin-bottom:22px;}
+
+label{ display:flex; align-items:center; gap:8px; font-size:0.85rem; margin-bottom:8px; font-weight:600; }
+
+input,select{
+  width:100%; padding:15px; border-radius:14px; border:1px solid var(--border);
+  background:rgba(255,255,255,0.8); font-size:0.95rem; transition:0.3s;
+}
+
+input:focus,select:focus{
+  outline:none; border-color:var(--primary); background:#fff;
+  box-shadow:0 0 0 4px rgba(0,86,179,0.1);
+}
+
+.radio-option{
+  display:flex; align-items:center; gap:12px; padding:14px;
+  background:rgba(0,86,179,0.05); border-radius:12px; margin-bottom:10px; cursor: pointer;
+}
+
+.radio-option input[type="radio"] { width: auto; margin: 0; }
+
+button{
+  width:100%; padding:18px; border:none; border-radius:16px; font-size:1.05rem;
+  font-weight:700; background: var(--primary); color:white; cursor:pointer; transition:0.3s;
+}
+
+button:hover:not(:disabled){
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(0,86,179,0.3);
+}
+
+button:disabled{ opacity:0.6; }
+
+.loader{
+  display:none; border:3px solid #fff; border-top:3px solid transparent;
+  border-radius:50%; width:22px; height:22px; margin:auto; animation:spin 1s linear infinite;
+}
+
+@keyframes spin{ 100%{transform:rotate(360deg);} }
+
+#success{display:none;text-align:center;}
+
+.info-box{
+  margin-top:20px; padding:20px; border-radius:14px;
+  background:rgba(0,86,179,0.05); border:1px solid var(--border); text-align:left;
+}
+
+.info-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+
+.error-message { color: #ef4444; font-size: 0.8rem; margin-top:5px; display:block; }
+
+#formStatus { margin-top: 15px; text-align: center; color: #ef4444; font-weight: 600; }
+
+.employment-details { display: none; margin-top: 15px; padding: 20px; background: rgba(0,86,179,0.03); border-radius: 12px; border: 1px solid var(--border); }
+.employment-details.active { display: block; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div id="formBody">
+  <div class="hero-image-container">
+    <img src="image.png" alt="Techsavanna Software Institute">
+  </div>
+
+  <h1 id="mainTitle">
+    <span style="color: var(--primary);">Techsavanna</span> 
+    <span style="color: var(--secondary);">Software</span> 
+    <span style="color: var(--tertiary);">Institute</span>
+  </h1>
+
+  <p class="description">
+    Apply for our professional software development intake programs. Select your preferred course and session below to begin your journey.
+  </p>
+
+  <form id="mainForm">
+    <section>
+      <h3>Personal Information</h3>
+      <div class="form-group">
+        <label><i data-lucide="user"></i> Full Name</label>
+        <input type="text" name="studentName" id="studentName" placeholder="Enter your full name">
+        <span class="error-message" id="studentNameError"></span>
+      </div>
+
+      <div class="form-group">
+        <label><i data-lucide="mail"></i> Email Address</label>
+        <input type="email" name="email" id="email" placeholder="example@mail.com">
+        <span class="error-message" id="emailError"></span>
+      </div>
+
+      <div class="form-group">
+        <label><i data-lucide="credit-card"></i> ID Number</label>
+        <input type="text" name="idNumber" id="idNumber" placeholder="Enter your National ID/Passport number">
+        <span class="error-message" id="idNumberError"></span>
+      </div>
+
+      <div class="form-group">
+        <label><i data-lucide="calendar"></i> Date of Birth</label>
+        <input type="date" name="dob" id="dob">
+        <span class="error-message" id="dobError"></span>
+      </div>
+
+      <div class="form-group">
+        <label><i data-lucide="phone"></i> WhatsApp Number</label>
+        <input type="tel" name="phone" id="phone" placeholder="Include country code (e.g., +254...)">
+        <span class="error-message" id="phoneError"></span>
+      </div>
+    </section>
+
+    <section>
+      <h3>Program Selection</h3>
+      <div class="form-group">
+        <label><i data-lucide="book-open"></i> Course Applying For</label>
+        <select name="courseSelection" id="courseSelection">
+          <option value="">Select Course</option>
+          <option>Software Development</option>
+          <option>Software Engineering</option>
+          <option>Web Development</option>
+        </select>
+        <span class="error-message" id="courseSelectionError"></span>
+      </div>
+
+      <div class="form-group">
+        <label><i data-lucide="calendar-days"></i> Preferred Intake</label>
+        <select name="intakePeriod" id="intakePeriod">
+          <option value="">Select Intake</option>
+          <option value="April Intake">April Intake</option>
+          <option value="August Intake">August Intake</option>
+          <option value="November/December Intake">November/December Intake</option>
+        </select>
+        <span class="error-message" id="intakePeriodError"></span>
+      </div>
+    </section>
+
+    <section>
+      <h3>Employment Information</h3>
+      <div class="form-group">
+        <label><i data-lucide="briefcase"></i> Are you currently employed?</label>
+        <div class="radio-option" onclick="document.getElementById('employedYes').click()">
+          <input type="radio" name="employed" id="employedYes" value="Yes">
+          <span>Yes, I am employed</span>
+        </div>
+        <div class="radio-option" onclick="document.getElementById('employedNo').click()">
+          <input type="radio" name="employed" id="employedNo" value="No">
+          <span>No, I am not employed</span>
+        </div>
+        <span class="error-message" id="employedError"></span>
+      </div>
+
+      <div class="employment-details" id="employmentDetails">
+        <div class="form-group">
+          <label><i data-lucide="user-circle"></i> Profession</label>
+          <input type="text" name="profession" id="profession" placeholder="Enter your profession/job title">
+          <span class="error-message" id="professionError"></span>
+        </div>
+
+        <div class="form-group">
+          <label><i data-lucide="building-2"></i> Place of Work</label>
+          <input type="text" name="placeOfWork" id="placeOfWork" placeholder="Enter your company/organization name">
+          <span class="error-message" id="placeOfWorkError"></span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Awareness</h3>
+      <div class="form-group">
+        <label><i data-lucide="search"></i> How did you hear about TSI?</label>
+        <select name="referralSource" id="referralSource">
+          <option value="">Select source</option>
+          <option>Walk-In</option>
+          <option>WhatsApp Status/Group</option>
+          <option>Social Media (Tiktok/Instagram/Facebook)</option>
+          <option>Referral from a Friend</option>
+          <option>Physical Poster/Flyer</option>
+          <option>Other</option>
+        </select>
+        <span class="error-message" id="referralSourceError"></span>
+      </div>
+    </section>
+
+    <button type="submit" id="submitBtn">
+      <span id="btnText">Submit Application</span>
+      <div class="loader" id="loader"></div>
+    </button>
+    <div id="formStatus"></div>
+  </form>
+</div>
+
+<div id="success">
+  <div class="success-icon">
+    <i data-lucide="check-circle" style="color:#22c55e; width:70px; height:70px;"></i>
+  </div>
+  <h1>Application Submitted</h1>
+  <p>Thank you for applying to Techsavanna Software Institute.</p>
+  <div class="info-box">
+    <div class="info-row"><i data-lucide="mail"></i> <span>Confirmation email will be sent shortly</span></div>
+    <div class="info-row"><i data-lucide="message-circle"></i> <span>Our admissions team will contact you via WhatsApp</span></div>
+    <div class="info-row"><i data-lucide="check-square"></i> <span>Further instructions will follow</span></div>
+  </div>
+  <button class="back-btn" onclick="location.reload()" style="margin-top:20px; width:auto; padding:12px 40px;">Back</button>
+</div>
+</div>
+
+<script>
+lucide.createIcons();
+const form = document.getElementById('mainForm');
+const empBox = document.getElementById('employmentDetails');
+
+document.getElementsByName('employed').forEach(radio => {
+  radio.addEventListener('change', (e) => {
+    if(e.target.value === 'Yes') {
+      empBox.classList.add('active');
+      empBox.style.display = 'block';
+    } else {
+      empBox.classList.remove('active');
+      empBox.style.display = 'none';
+    }
+  });
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  let valid = true;
+  document.querySelectorAll('.error-message').forEach(el => el.innerText = "");
+  document.getElementById('formStatus').innerText = "";
+
+  if(!form.studentName.value.trim()){ document.getElementById('studentNameError').innerText = "Full Name is required"; valid = false; }
+  if(!form.email.value.trim()){ document.getElementById('emailError').innerText = "Email is required"; valid = false; }
+  if(!form.phone.value.trim()){ document.getElementById('phoneError').innerText = "WhatsApp is required"; valid = false; }
+  if(!form.courseSelection.value){ document.getElementById('courseSelectionError').innerText = "Select a course"; valid = false; }
+  if(!form.intakePeriod.value){ document.getElementById('intakePeriodError').innerText = "Select intake"; valid = false; }
+  if(!form.referralSource.value){ document.getElementById('referralSourceError').innerText = "Source is required"; valid = false; }
+
+  const employed = form.querySelector('input[name="employed"]:checked');
+  if(!employed){
+    document.getElementById('employedError').innerText = "Indicate employment status";
+    valid = false;
+  } else if(employed.value === 'Yes') {
+    if(!form.profession.value.trim()){ document.getElementById('professionError').innerText = "Profession is required"; valid = false; }
+    if(!form.placeOfWork.value.trim()){ document.getElementById('placeOfWorkError').innerText = "Place of work is required"; valid = false; }
+  }
+
+  if(!valid) return;
+
+  const btn = document.getElementById('submitBtn');
+  const loader = document.getElementById('loader');
+  const btnText = document.getElementById('btnText');
+
+  btn.disabled = true;
+  btnText.style.display = 'none';
+  loader.style.display = 'block';
+
+  try {
+    const res = await fetch('https://script.google.com/macros/s/AKfycbwDts8Hagwi-gkItSt-Q5ZN6bcvMbWFghizhFizl1pNlhs5zYf0Yxufxinawc-VuPE1/exec', {
+      method: 'POST',
+      body: new URLSearchParams(new FormData(form))
+    });
+    const text = await res.text();
+
+    if(text === "Success") {
+      document.getElementById('formBody').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+      lucide.createIcons();
+    } else {
+      document.getElementById('formStatus').innerText = "Submission Error: " + text;
+      btn.disabled = false;
+      btnText.style.display = 'inline';
+      loader.style.display = 'none';
+    }
+  } catch (err) {
+    document.getElementById('formStatus').innerText = "Connection error. Check internet.";
+    btn.disabled = false;
+    btnText.style.display = 'inline';
+    loader.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
